@@ -1,4 +1,4 @@
-package com.example.jetpack_ex
+package com.example.jetpack_ex.viewbinding
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

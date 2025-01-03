@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.jetpack_ex.R
 
 // ViewModel
@@ -26,7 +27,9 @@ import com.example.jetpack_ex.R
 
 class MainActivity : AppCompatActivity() {
 
-    private var countValue = 0
+//    private var countValue = 0
+
+    lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +40,9 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
         Log.d("MainActivity", "onCreate")
 
         val plusBtn : Button = findViewById(R.id.plus);
@@ -44,14 +50,20 @@ class MainActivity : AppCompatActivity() {
 
         val resultArea : TextView = findViewById(R.id.result)
 
+        resultArea.text = viewModel.countValue.toString() // 생명 주기에 변화가 생겨도 값이 유지되도록 한다.
+
         plusBtn.setOnClickListener {
-            countValue++
-            resultArea.text = countValue.toString()
+            viewModel.plus()
+            resultArea.text = viewModel.countValue.toString()
+//            countValue++
+//            resultArea.text = countValue.toString()
         }
 
         minusBtn.setOnClickListener {
-            countValue--
-            resultArea.text = countValue.toString()
+            viewModel.minus()
+            resultArea.text = viewModel.countValue.toString()
+//            countValue--
+//            resultArea.text = countValue.toString()
         }
     }
 

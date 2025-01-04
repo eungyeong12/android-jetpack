@@ -32,8 +32,21 @@ class MainActivity : AppCompatActivity() {
             viewModel.plusLiveDataValue()
         }
 
-        viewModel.testMutableLiveData.observe(this, Observer {
-            findViewById<TextView>(R.id.textArea).text = viewModel.testMutableLiveData.value.toString()
+        viewModel.testLiveData.observe(this, Observer {
+            findViewById<TextView>(R.id.textArea).text = it.toString()
         })
+
+//        viewModel.testLiveData.value = 10
+
+//        findViewById<Button>(R.id.btnArea).setOnClickListener {
+//            viewModel.plusLiveDataValue()
+//        }
+//
+//        viewModel.testMutableLiveData.observe(this, Observer {
+//            findViewById<TextView>(R.id.textArea).text = it.toString()
+//        })
+//
+//        viewModel.testMutableLiveData.value = 10 // MutableLiveData는 값 변경 가능
+
     }
 }
